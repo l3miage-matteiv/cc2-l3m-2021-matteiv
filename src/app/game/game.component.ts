@@ -10,8 +10,12 @@ import { COORD, BoardProcessed } from "../generator";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GameComponent implements OnInit {
+  board: BoardProcessed;
   constructor(public service: BoardService) {
-    console.log(this.service.observable);
+    this.service.observable.subscribe(newBoard => {
+      this.board = newBoard;
+    });
+    console.log(this.board);
   }
   ngOnInit(): void {}
 }
